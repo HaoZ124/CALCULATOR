@@ -1,0 +1,57 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    width: 500px;
+    height: 700px;
+    border: 2px solid black;
+    text-align: center;
+    font-size: 40px;
+}
+
+.display {
+    grid-row: 1;
+    grid-column: 1/5;
+}
+
+#clear {
+    grid-row: 2/3;
+    grid-column: 1;
+}
+
+#divide {
+    grid-row: 2/3;
+    grid-column: 2/3;
+}
+
+#multi {
+    grid-row: 2/3;
+    grid-column: 3/4;
+}
+
+#sub {
+    grid-row: 2/3;
+    grid-column: 4/5;
+}
+
+#add {
+    grid-row: 3/5;
+    grid-column: 4/5;
+}
+
+#equal {
+    grid-row: 5/7;
+    grid-column: 4/5;
+}
+
+#key0 {
+    grid-row: 6/7;
+    grid-column: 1/3;
+}
