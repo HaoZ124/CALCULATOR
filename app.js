@@ -6,8 +6,65 @@ const input = {
 
 const upper = document.querySelector('.upper');
 const bottom = document.querySelector('.bottom');
+const numKey = Array.from(document.querySelectorAll('.input'));
+const enter = document.querySelector('.enter');
+const del = document.querySelector('.del');
+const clear = document.querySelector('.clear');
+const operate = Array.from(document.querySelectorAll('.op'));
 
-//Get the value from pressing key
+//All keys function listed below
+window.addEventListener('keydown', keyPress);
+
+//number keys function
+numKey.forEach((key) => {
+    key.addEventListener('click', (e) => {
+        getValue(e.target.value);
+    })
+})
+
+//operator keys function
+operate.forEach((key) => {
+    key.addEventListener('click', (e) => {
+        getOperate(e.target.value);
+    })
+})
+
+//equal key function
+enter.addEventListener('click', () => {
+    if (input.currentNum !== '' && input.previousNum !== '') {
+        compute(input);
+    }
+});
+
+//delete key function
+del.addEventListener('click', deleteNum);
+
+//Clearall key function
+clear.addEventListener('click', clearAll);
+
+//All function required are listed below
+
+//Respond the keypad input
+function keyPress(e) {
+    e.preventDefault();
+    if (e.key >= 0 && e.key <= 9) {
+        getValue(e.key);
+    }
+    if (e.key === "Enter" || e.key === "=") {
+        compute(input);
+    }
+    if (e.key === "+" || e.key === "-" || e.key === "/" || e.key === "*") {
+        getOperate(e.key);
+    }
+    if (e.key === ".") {
+        getValue(e.key);
+    }
+    if (e.key === "Backspace") {
+        deleteNum();
+    }
+}
+
+//Get the input value
 function getValue(a) {
     if (a !== '.' || !input.currentNum.includes('.')) {
         if (input.currentNum.length <= 10) {
@@ -17,6 +74,7 @@ function getValue(a) {
     upper.textContent = input.currentNum;
 }
 
+//get the operator
 function getOperate(b) {
     if (input.currentNum !== '') {
         if (input.previousNum !== '') {
@@ -29,7 +87,6 @@ function getOperate(b) {
     upper.append(input.op);
 }
 
-
 //Make function calculate numbers
 function compute(input) {
     var pre = parseFloat(input.previousNum);
@@ -39,43 +96,39 @@ function compute(input) {
     switch (input.op) {
         case '+':
             pre += cur;
+            pre = roundNum(pre);
+            input.currentNum = pre.toString();
             break
         case '-':
             pre -= cur;
+            pre = roundNum(pre);
+            input.currentNum = pre.toString();
             break
         case '*':
             pre *= cur;
+            pre = roundNum(pre);
+            input.currentNum = pre.toString();
             break
         case '/':
             if (cur !== 0) {
                 pre /= cur;
+                pre = roundNum(pre);
+                input.currentNum = pre.toString();
             } else {
-                input.currentNum = 'Error, cannot be divided by 0!'
+                input.currentNum = "Error, can't be divided by 0!";
             }
     }
-    pre = roundNum(pre);
-    input.currentNum = pre.toString();
     bottom.textContent = input.currentNum;
     input.previousNum = '';
     input.op = '';
-
 }
 
+//Round the result number
 function roundNum(num) {
-    return Math.round(num * 100000) / 100000;
+    return Math.round(num * 10000000) / 10000000;
 }
-
-var enter = document.querySelector('#enter');
-enter.addEventListener('click', () => {
-    if (input.currentNum !== '' && input.previousNum !== '') {
-        compute(input);
-    }
-});
 
 //Function to clear all the input and output
-var clear = document.querySelector('.clear');
-clear.addEventListener('click', clearAll);
-
 function clearAll() {
     var display = document.querySelector('.display');
     input.currentNum = '';
@@ -85,11 +138,8 @@ function clearAll() {
     bottom.textContent = 0;
 }
 
-const del = document.querySelector('.del');
-del.addEventListener('click', deleteNum);
-
+//Delete the last input number
 function deleteNum() {
     input.currentNum = input.currentNum.slice(0, -1);
-    console.log(input);
     upper.textContent = input.currentNum;
 }
