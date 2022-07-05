@@ -12,7 +12,10 @@
 <body>
     <h1>Calculator</h1>
     <div class="content">
-        <div class="display"></div>
+        <div class="display">
+            <div class="upper"></div>
+            <div class="bottom"></div>
+        </div>
         <div id="key1"><button class='input' value="1" onclick="getValue(this.value)">1</button></div>
         <div id="key2"><button class='input' value="2" onclick="getValue(this.value)">2</button></div>
         <div id="key3"><button class='input' value="3" onclick="getValue(this.value)">3</button></div>
@@ -23,13 +26,14 @@
         <div id="key8"><button class='input' value="8" onclick="getValue(this.value)">8</button></div>
         <div id="key9"><button class='input' value="9" onclick="getValue(this.value)">9</button></div>
         <div id="key0"><button class='input' value="0" onclick="getValue(this.value)">0</button></div>
-        <div id="add"><button class='input' value="+" onclick="getValue(this.value)">+</button></div>
-        <div id="sub"><button class='input' value="-" onclick="getValue(this.value)">-</button></div>
-        <div id="multi"><button class='input' value="*" onclick="getValue(this.value)">*</button></div>
-        <div id="divide"><button class='input' value="/" onclick="getValue(this.value)">/</button></div>
-        <div id="equal"><button class='input'>=</button></div>
+        <div id="add"><button class='input' value="+" onclick="getOperate(this.value)">+</button></div>
+        <div id="sub"><button class='input' value="-" onclick="getOperate(this.value)">-</button></div>
+        <div id="multi"><button class='input' value="*" onclick="getOperate(this.value)">*</button></div>
+        <div id="divide"><button class='input' value="/" onclick="getOperate(this.value)">/</button></div>
+        <div id="equal"><button class='input' id="enter">=</button></div>
         <div id="dot"><button class='input' value="." onclick="getValue(this.value)">.</button></div>
         <div id="clear"><button class="clear">clear</button></div>
+        <div id="delete"><button class="del">Del</button></div>
     </div>
 
     <script src="app.js"></script>
